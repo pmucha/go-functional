@@ -1,9 +1,9 @@
 package functional
 
-// Uniq returns a copy of the slice `src[]` with
+// Returns a copy of the slice `src[]` with all
 // the duplicate values removed.
 //
-// Note: The implementation relies on `Includes` function.
+// **Note:** The implementation relies on `Includes` function.
 //
 // Example:
 // 	foo := []int{1, 1, 2, 3, 3, 4, 5}

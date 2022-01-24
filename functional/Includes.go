@@ -1,8 +1,7 @@
 package functional
 
-// Includes checks if any of the elements in slice `src[]`
-// is equal to `val`.
-// Returns `bool`
+// Checks if slice `src[]` contains a `val`.
+// Returns `bool` result.
 //
 // Example:
 // 	foo := []int{1, 2, 3, 4, 5, 6, 7, 8}

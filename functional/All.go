@@ -1,6 +1,6 @@
 package functional
 
-// All runs a function `f() bool` on all elements of slice `src[]`
+// Runs a function `f() bool` on all elements of slice `src[]`
 // until one returns `false`.
 // Returns `true` if all the `src[]` elements meet the `f()`
 // criteria, `false` otherwise.

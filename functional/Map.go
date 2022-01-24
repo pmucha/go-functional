@@ -1,6 +1,6 @@
 package functional
 
-// Map runs the function `f()` on every element in slice `src[]`.
+// Runs the function `f()` on every element in slice `src[]`.
 // Returns a processed copy of `src[]` slice.
 //
 // Example:
