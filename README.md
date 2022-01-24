@@ -11,7 +11,7 @@ All functions use generics, so they require Go ver. 1.18+.
 func All[T any](f func(val T) bool) func(src []T) bool
 ```
 
-All runs a function `f() bool` on all elements of slice `src[]` until one
+Runs a function `f() bool` on all elements of slice `src[]` until one
 returns `false`. Returns `true` if all the `src[]` elements meet the `f()`
 criteria, `false` otherwise.
 
@@ -28,10 +28,31 @@ functional.All(allNotZero)(foo) // returns true
 ---
 
 ```go
+func Compose[T any](f ...func(T) T) func(T) T
+```
+Performs right-to-left function composition.
+
+Example:
+
+```go
+square := func(x int) int {
+    return x * x
+}
+half := func(x int) int {
+    return x / 2
+}
+add1 := func(x int) int {
+    return x + 1
+}
+functional.Compose(add1, half, square)(10) // returns 51
+```
+
+---
+
+```go
 func Includes[T comparable](val T) func(src []T) bool
 ```
-Includes checks if any of the elements in slice `src[]` is equal to `val`.
-Returns `bool`
+Checks if slice `src[]` contains a `val`. Returns `bool` result.
 
 Example:
 ```go
@@ -45,7 +66,7 @@ functional.Includes(5)(foo) // returns true
 ```go
 func Map[T any](f func(val T) T) func(src []T) []T
 ```
-Map runs the function `f()` on every element in slice `src[]`. Returns a
+Runs the function `f()` on every element in slice `src[]`. Returns a
 processed copy of `src[]` slice.
 
 Example:
@@ -56,6 +77,28 @@ mapDouble := func(val int) int {
 }
 functional.Map(mapDouble)(foo) // returns 2, 4, 6, 8, 10
 ```
+
+---
+
+```go
+func Pipe[T any](f ...func(T) T) func(T) T
+```
+Performs left-to-right function composition.
+
+Example:
+```go
+square := func(x int) int {
+    return x * x
+}
+half := func(x int) int {
+    return x / 2
+}
+add1 := func(x int) int {
+    return x + 1
+}
+functional.Pipe(square, half, add1)(10) // returns 51
+```
+
 
 ---
 
@@ -81,9 +124,9 @@ functional.Reduce(reduceSum)(10)(foo) // returns 25
 func Uniq[T comparable](src []T) []T
 ```
 
-Uniq returns a copy of the slice `src[]` with the duplicate values removed and ordering preserved.
+Returns a copy of the slice `src[]` with all the duplicate values removed.
 
-Note: The implementation relies on `Includes` function.
+**Note:** The implementation relies on `Includes` function.
 
 Example:
 
