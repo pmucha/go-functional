@@ -28,6 +28,27 @@ functional.All(allNotZero)(foo) // returns true
 ---
 
 ```go
+func Any[T any](f func(val T) bool) func(src []T) bool
+```
+
+Runs a function `f() bool` on all ments of slice `src[]`
+until one returns `true`.
+Returns `true` if at least one of the ments in the `src[]`
+meet the criteria, `false` otherwise.
+
+Example:
+
+```go
+foo := []int{1, 2, 3, 4, 5}
+isEven := func(val int) bool {
+    return val % 2 == 0
+}
+functional.Any(isEven)(foo) // returns true
+```
+
+---
+
+```go
 func Compose[T any](f ...func(T) T) func(T) T
 ```
 Performs right-to-left function composition.
