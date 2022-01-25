@@ -67,6 +67,22 @@ add1 := func(x int) int {
 }
 functional.Compose(add1, half, square)(10) // returns 51
 ```
+---
+```go
+func Filter[T any](f func(val T) bool) func(src []T) []T
+```
+
+Runs a `f() bool` on all the elements of the `src[]` slice and returns a new
+slice containing only the elements that returned `true`.
+
+Example:
+```go
+foo := []int{1, 2, 3, 4, 5}
+isEven := func(val int) bool {
+    return val%2 == 0
+}
+functional.Filter(isEven)(foo) // returns 2, 4
+```
 
 ---
 
