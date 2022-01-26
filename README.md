@@ -129,6 +129,32 @@ functional.Includes(5)(foo) // returns true
 
 ---
 
+### Keys
+
+```go
+func Keys[K comparable, V any](m map[K]V) []K
+```
+
+Returns a slice containing the keys of the provided map `m`.
+
+Example:
+
+```go
+m := map[string]int{
+    "Matthew": 1,
+    "Mark": 2,
+    "Luke": 3,
+    "John": 4,
+}
+
+functional.Keys(m) // returns "Matthew", "Mark", "Luke", "John"
+```
+
+**Note:** Due to current Go generics' limitations the usability of this
+function in composing is limited.
+
+---
+
 ### Map
 
 ```go
@@ -207,6 +233,32 @@ Example:
 foo := []int{1, 1, 2, 3, 3, 4, 5}
 functional.Uniq(foo) // returns 1, 2, 3, 4, 5
 ```
+
+---
+
+### Values
+
+```go
+func Values[K comparable, V any](m map[K]V) []V
+```
+
+Returns a slice containing the keys of the provided map `m`.
+
+Example:
+
+```go
+m := map[int]string{
+    1: "Matthew",
+    2: "Mark",
+    3: "Luke",
+    4: "John",
+}
+
+functional.Values(m) // returns "Matthew", "Mark", "Luke", "John"
+```
+
+**Note:** Due to current Go generics' limitations the usability of this
+function in composing is limited.
 
 ---
 
