@@ -9,7 +9,7 @@ func Test_ZipMap(t *testing.T) {
 	vals := []interface{}{"minus one", 0.1, 1, nil, "three"}
 
 	// See "known issues"
-	zip := ZipMap(keys, vals)(vals)
+	zip := ZipMap(keys, vals)
 
 	if len(zip) != 4 {
 		t.Log("a zipped map has wrong length; expected 4, result:", len(zip))

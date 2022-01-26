@@ -213,7 +213,7 @@ functional.Uniq(foo) // returns 1, 2, 3, 4, 5
 ### ZipMap
 
 ```go
-func ZipMap[K comparable, V any](keys []K, _ []V) func(vals []V) map[K]V
+func ZipMap[K comparable, V any](keys []K, vals []V) map[K]V
 ```
 
 Combines provided slices into a `map` which has `keys[]` elements as keys,
@@ -229,14 +229,12 @@ Example:
 keys := []int{-1, 0, 1, 2, 2, 3}
 vals := []string{"minus one", "zero", "one", "two", "three"}
 
-functional.ZipMap(keys, vals)(vals)
+functional.ZipMap(keys, vals)
     // returns -1 -> "minus one", 0 -> "zero", 1 -> "one", 2 -> "three"
 ```
 
-**Known issue**: Currently (1.18beta1) Go fails to infer the type
-for `vals` in returned function, unless it is somehow
-provided in the primary function. That's why it's needed
-to provide `vals` in the primary function as well.
+**Note:** Due to current Go generics' limitations the usability
+of this function in composing is limited.
 
 ## TODO
 
