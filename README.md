@@ -5,6 +5,25 @@ in a functional manner -- curried, iteratee-first data-last.
 
 All functions use generics, so they require Go ver. 1.18+.
 
+## Installation
+
+To download the module use:
+```
+go get github.com/pmucha/go-functional/functional
+```
+
+To use it inside your program:
+```go
+import "github.com/pmucha/go-functional/functional"
+```
+
+This way all the functions will be available as
+`functional.FunctionName()`. Use:
+```go
+import f "github.com/pmucha/go-functional/functional"
+```
+to make them available through an alias: `f.FunctionName()`.
+
 ## Functions
 
 ### All
