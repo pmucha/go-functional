@@ -7,6 +7,8 @@ All functions use generics, so they require Go ver. 1.18+.
 
 ## Functions
 
+### All
+
 ```go
 func All[T any](f func(val T) bool) func(src []T) bool
 ```
@@ -26,6 +28,8 @@ functional.All(allNotZero)(foo) // returns true
 ```
 
 ---
+
+### Any
 
 ```go
 func Any[T any](f func(val T) bool) func(src []T) bool
@@ -48,6 +52,8 @@ functional.Any(isEven)(foo) // returns true
 
 ---
 
+### Compose
+
 ```go
 func Compose[T any](f ...func(T) T) func(T) T
 ```
@@ -67,7 +73,10 @@ add1 := func(x int) int {
 }
 functional.Compose(add1, half, square)(10) // returns 51
 ```
+
 ---
+
+### Filter
 ```go
 func Filter[T any](f func(val T) bool) func(src []T) []T
 ```
@@ -86,6 +95,8 @@ functional.Filter(isEven)(foo) // returns 2, 4
 
 ---
 
+### Includes
+
 ```go
 func Includes[T comparable](val T) func(src []T) bool
 ```
@@ -99,6 +110,7 @@ functional.Includes(5)(foo) // returns true
 
 ---
 
+### Map
 
 ```go
 func Map[T any](f func(val T) T) func(src []T) []T
@@ -116,6 +128,8 @@ functional.Map(mapDouble)(foo) // returns 2, 4, 6, 8, 10
 ```
 
 ---
+
+### Pipe
 
 ```go
 func Pipe[T any](f ...func(T) T) func(T) T
@@ -136,8 +150,9 @@ add1 := func(x int) int {
 functional.Pipe(square, half, add1)(10) // returns 51
 ```
 
-
 ---
+
+### Reduce
 
 ```go
 func Reduce[T any](f func(result T, val T) T) func(begin T) func(src []T) T
@@ -156,6 +171,8 @@ functional.Reduce(reduceSum)(10)(foo) // returns 25
 ```
 
 ---
+
+### Uniq
 
 ```go
 func Uniq[T comparable](src []T) []T
