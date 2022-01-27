@@ -95,6 +95,28 @@ functional.Compose(add1, half, square)(10) // returns 51
 
 ---
 
+### Concat
+
+```go
+func Concat[T comparable](src []T) func(with ...[]T) []T
+```
+
+Returns a slice containing the elements of `src[]` followed by the elements
+of all slices provided as `with[]`.
+
+Example:
+
+```go
+foo := []int{1, 1, 2, 3, 3, 4, 5}
+bar1 := []int{2, 6, 9}
+bar2 := []int{7, 9, 10}
+bar3 := []int{9, 11, 12}
+functional.Concat(foo)(bar1, bar2, bar3)
+    // returns [1 1 2 3 3 4 5 2 6 9 7 9 10 9 11 12]
+```
+
+---
+
 ### Filter
 ```go
 func Filter[T any](f func(val T) bool) func(src []T) []T
