@@ -217,6 +217,28 @@ functional.Reduce(reduceSum)(10)(foo) // returns 25
 
 ---
 
+### Union
+
+```go
+func Union[T comparable](src []T) func(with ...[]T) []T
+```
+
+Returns a unique slice containing the elements of `src[]` and the elements
+of all slices provided as `with[]`.
+
+**Note:** The implementation relies on the `Uniq` function.
+
+Example:
+
+```go
+foo := []int{1, 1, 2, 3, 3, 4, 5}
+bar1 := []int{2, 6, 9}
+bar2 := []int{7, 9, 10}
+bar3 := []int{9, 11, 12}
+functional.Union(foo)(bar1, bar2, bar3) // returns [1 2 3 4 5 6 9 7 10 11 12]
+```
+
+---
 ### Uniq
 
 ```go
@@ -225,7 +247,7 @@ func Uniq[T comparable](src []T) []T
 
 Returns a copy of the slice `src[]` with all the duplicate values removed.
 
-**Note:** The implementation relies on `Includes` function.
+**Note:** The implementation relies on the `Includes` function.
 
 Example:
 
