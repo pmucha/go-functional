@@ -131,7 +131,7 @@ foo := []int{1, 2, 3, 4, 5}
 isEven := func(val int) bool {
     return val%2 == 0
 }
-functional.Filter(isEven)(foo) // returns 2, 4
+functional.Filter(isEven)(foo) // returns [2 4]
 ```
 
 ---
@@ -169,7 +169,7 @@ m := map[string]int{
     "John": 4,
 }
 
-functional.Keys(m) // returns "Matthew", "Mark", "Luke", "John"
+functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"]
 ```
 
 **Note:** Due to current Go generics' limitations the usability of this
@@ -191,7 +191,7 @@ foo := []int{1, 2, 3, 4, 5}
 mapDouble := func(val int) int {
     return val * 2
 }
-functional.Map(mapDouble)(foo) // returns 2, 4, 6, 8, 10
+functional.Map(mapDouble)(foo) // returns [2 4 6 8 10]
 ```
 
 ---
@@ -275,7 +275,7 @@ Example:
 
 ```go
 foo := []int{1, 1, 2, 3, 3, 4, 5}
-functional.Uniq(foo) // returns 1, 2, 3, 4, 5
+functional.Uniq(foo) // returns [1 2 3 4 5]
 ```
 
 ---
@@ -298,7 +298,7 @@ m := map[int]string{
     4: "John",
 }
 
-functional.Values(m) // returns "Matthew", "Mark", "Luke", "John"
+functional.Values(m) // returns ["Matthew" "Mark" "Luke" "John"]
 ```
 
 **Note:** Due to current Go generics' limitations the usability of this
@@ -326,7 +326,7 @@ keys := []int{-1, 0, 1, 2, 2, 3}
 vals := []string{"minus one", "zero", "one", "two", "three"}
 
 functional.ZipMap(keys, vals)
-    // returns -1 -> "minus one", 0 -> "zero", 1 -> "one", 2 -> "three"
+    // returns [-1: "minus one", 0: "zero", 1: "one", 2: "three"]
 ```
 
 **Note:** Due to current Go generics' limitations the usability
