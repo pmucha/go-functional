@@ -117,6 +117,24 @@ functional.Concat(foo)(bar1, bar2, bar3)
 
 ---
 
+### Contains
+
+```go
+func Contains[T comparable](val T) func(src []T) bool
+```
+Checks if slice `src[]` contains a `val`. Returns `bool` result.
+
+**Note**: It works just like `Includes` except
+it accepts the arguments in reverse order.
+
+Example:
+```go
+foo := []int{1, 2, 3, 4, 5, 6, 7, 8}
+functional.Contains(foo)(5) // returns true
+```
+
+---
+
 ### Filter
 ```go
 func Filter[T any](f func(val T) bool) func(src []T) []T
