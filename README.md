@@ -351,7 +351,7 @@ functional.Values(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
 ### ZipMap
 
 ```go
-func ZipMap[T comparable](keys []T) func(vals []any) map[T]any
+func ZipMap[K comparable, V any](keys []K, vals []V) (map[K]V, error)
 ```
 
 Combines provided slices into a `map` which has `keys[]` elements as keys,
@@ -360,6 +360,7 @@ If the `keys[]` is empty, the result will be an empty map.
 If the `keys[]` isn't unique, the subsequent values will
 overwrite the previously set ones. If the `values[]` is shorter than the
 `keys[]`, the exceeding elements won't be used.
+Returns the new map and an error if occurred.
 
 Example:
 
@@ -367,8 +368,8 @@ Example:
 keys := []int{-1, 0, 1, 2, 2, 3}
 vals := []string{"minus one", "zero", "one", "two", "three"}
 
-functional.ZipMap(keys)(vals)
-    // returns [-1: "minus one", 0: "zero", 1: "one", 2: "three"]
+functional.ZipMap(keys, vals)
+	// returns [-1: "minus one", 0: "zero", 1: "one", 2: "three"], nil
 ```
 
 ## TODO
