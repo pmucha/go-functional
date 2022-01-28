@@ -205,18 +205,19 @@ functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
 ### Map
 
 ```go
-func Map[T any](f func(val T) T) func(src []T) []T
+func Map[T any](f func(val T) (T, error)) func(src []T) ([]T, error)
 ```
-Runs the function `f()` on every element in slice `src[]`. Returns a
-processed copy of `src[]` slice.
+Runs the function `f()` on every element in slice `src[]`.
+Returns a processed copy of `src[]` slice.
+Also returns an error if occurred.
 
 Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
-mapDouble := func(val int) int {
-    return val * 2
+double := func(val int) (int, error) {
+    return val * 2, nil
 }
-functional.Map(mapDouble)(foo) // returns [2 4 6 8 10]
+functional.Map(double)(foo) // returns [2 4 6 8 10], nil
 ```
 
 ---
