@@ -58,19 +58,20 @@ functional.All(notZero)(foo) // returns true, nil
 func Any[T any](f func(val T) bool) func(src []T) bool
 ```
 
-Runs a function `f() bool` on all ments of slice `src[]`
+Runs a function `f()` on all elements of slice `src[]`
 until one returns `true`.
-Returns `true` if at least one of the ments in the `src[]`
+Returns `true` if at least one of the elements in the `src[]`
 meet the criteria, `false` otherwise.
+Also returns an error if occured.
 
 Example:
 
 ```go
 foo := []int{1, 2, 3, 4, 5}
-isEven := func(val int) bool {
-    return val % 2 == 0
+isEven := func(val int) (bool, error) {
+    return val % 2 == 0, nil
 }
-functional.Any(isEven)(foo) // returns true
+functional.Any(isEven)(foo) // returns true, nil
 ```
 
 ---
