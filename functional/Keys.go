@@ -1,6 +1,7 @@
 package functional
 
 // Returns a slice containing the keys of the provided map `m`.
+// Also returns an error if occured.
 //
 // Example:
 //	 m := map[string]int{
@@ -10,16 +11,13 @@ package functional
 //	 	"John": 4,
 //	 }
 //
-//	 functional.Keys(m) // returns "Matthew", "Mark", "Luke", "John"
-//
-// **Note:** Due to current Go generics' limitations the usability
-// of this function in composing is limited.
-func Keys[K comparable, V any](m map[K]V) []K {
+//	 functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
+func Keys[K comparable, V any](m map[K]V) ([]K, error) {
 	result := make([]K, 0, len(m))
 
 	for k := range m {
 		result = append(result, k)
 	}
 
-	return result
+	return result, nil
 }

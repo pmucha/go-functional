@@ -182,26 +182,23 @@ functional.Includes(5)(foo) // returns true, nil
 ### Keys
 
 ```go
-func Keys[K comparable, V any](m map[K]V) []K
+func Keys[K comparable, V any](m map[K]V) ([]K, error)
 ```
 
 Returns a slice containing the keys of the provided map `m`.
+Also returns an error if occured.
 
 Example:
 
 ```go
 m := map[string]int{
-    "Matthew": 1,
-    "Mark": 2,
-    "Luke": 3,
-    "John": 4,
+	"Matthew": 1,
+	"Mark": 2,
+	"Luke": 3,
+	"John": 4,
 }
-
-functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"]
+functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
 ```
-
-**Note:** Due to current Go generics' limitations the usability of this
-function in composing is limited.
 
 ---
 

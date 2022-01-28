@@ -10,8 +10,8 @@ func Test_Keys(t *testing.T) {
 		"John":    4,
 	}
 
-	if len(Keys(m)) != 4 {
-		t.Log("the number of keys doesn't match the original map; expected 4, result:", len(Keys(m)))
+	if keys, _ := Keys(m); len(keys) != 4 {
+		t.Log("the number of keys doesn't match the original map; expected 4, result:", len(keys))
 		t.Fail()
 	}
 }
