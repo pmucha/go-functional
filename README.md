@@ -141,19 +141,20 @@ functional.Contains(foo)(5) // returns true, nil
 
 ### Filter
 ```go
-func Filter[T any](f func(val T) bool) func(src []T) []T
+func Filter[T any](f func(val T) (bool, error)) func(src []T) ([]T, error)
 ```
-
-Runs a `f() bool` on all the elements of the `src[]` slice and returns a new
-slice containing only the elements that returned `true`.
+Runs a `f()` on all the elements of the `src[]` slice
+and returns a new slice containing only the elements
+that returned `true`. It also returns an error if occured.
 
 Example:
+
 ```go
 foo := []int{1, 2, 3, 4, 5}
-isEven := func(val int) bool {
-    return val%2 == 0
+isEven := func(val int) (bool, error) {
+	return val%2 == 0, nil
 }
-functional.Filter(isEven)(foo) // returns [2 4]
+functional.Filter(isEven)(foo) // returns [2, 4], nil
 ```
 
 ---
