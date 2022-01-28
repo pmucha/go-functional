@@ -9,9 +9,9 @@ func Test_ToAny(t *testing.T) {
 	strings := []string{"foo", "bar", "baz"}
 	interfaces := []interface{}{"minus one", 0.1, 1, nil, "three"}
 
-	anyInts := ToAny(ints)
-	anyStrings := ToAny(strings)
-	anyInterfaces := ToAny(interfaces)
+	anyInts, _ := ToAny(ints)
+	anyStrings, _ := ToAny(strings)
+	anyInterfaces, _ := ToAny(interfaces)
 
 	if len(anyInts) != 6 {
 		t.Log("anyfying ints failed; expected 6, result:", len(anyInts))

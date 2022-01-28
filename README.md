@@ -271,17 +271,18 @@ functional.Reduce(sum)(10)(foo) // returns 25, nil
 ### ToAny
 
 ```go
-func ToAny[T any](s []T) []any
+func ToAny[T any](s []T) ([]any, error)
 ```
 
-Converts any slice of type `[]T` to `[]any` which might be helpful for
-functions such as `ZipMap()`.
+Converts any slice of type `[]T` to `[]any`.
+Returns the copy of the slice and the error
+if occurred.
 
 Example:
 
 ```go
 strings := []string{"foo", "bar", "baz"}
-ToAny(strings) // returns []interface [foo bar baz]
+ToAny(strings) // returns []interface{"foo", "bar", "baz"}, nil
 ```
 
 ---
