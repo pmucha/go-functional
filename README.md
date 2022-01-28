@@ -45,7 +45,7 @@ Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
 notZero := func(val int) (bool, nil) {
-    return val != 0, nil
+  return val != 0, nil
 }
 functional.All(notZero)(foo) // returns true, nil
 ```
@@ -69,7 +69,7 @@ Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
 isEven := func(val int) (bool, error) {
-    return val % 2 == 0, nil
+  return val % 2 == 0, nil
 }
 functional.Any(isEven)(foo) // returns true, nil
 ```
@@ -87,13 +87,13 @@ Example:
 
 ```go
 square := func(x int) (int, error) {
-	return x * x, nil
+  return x * x, nil
 }
 half := func(x int) (int, error) {
-	return x / 2, nil
+  return x / 2, nil
 }
 add1 := func(x int) (int, error) {
-	return x + 1, nil
+  return x + 1, nil
 }
 functional.Compose(add1, half, square)(10) // returns 51, nil
 ```
@@ -114,8 +114,7 @@ Example:
 ```go
 src1 := []int{1, 1, 2, 3, 3, 4, 5}
 src2 := []int{2, 6, 9}
-functional.Concat(src1, src2)
-	// returns [1 1 2 3 3 4 5 2 6 9], nil
+functional.Concat(src1, src2) // returns [1 1 2 3 3 4 5 2 6 9], nil
 ```
 
 ---
@@ -127,6 +126,7 @@ func Contains[T comparable](src []T) func(val T) (bool, error) {
 ```
 Checks if slice `src[]` contains a `val`.
 Returns `bool` result and an error if occured.
+
 **Note**: It works just like `Includes` except
 it accepts the arguments in reverse order.
 
@@ -152,7 +152,7 @@ Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
 isEven := func(val int) (bool, error) {
-	return val%2 == 0, nil
+  return val%2 == 0, nil
 }
 functional.Filter(isEven)(foo) // returns [2, 4], nil
 ```
@@ -192,10 +192,10 @@ Example:
 
 ```go
 m := map[string]int{
-	"Matthew": 1,
-	"Mark": 2,
-	"Luke": 3,
-	"John": 4,
+  "Matthew": 1,
+  "Mark":    2,
+  "Luke":    3,
+  "John":    4,
 }
 functional.Keys(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
 ```
@@ -215,7 +215,7 @@ Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
 double := func(val int) (int, error) {
-    return val * 2, nil
+  return val * 2, nil
 }
 functional.Map(double)(foo) // returns [2 4 6 8 10], nil
 ```
@@ -233,13 +233,13 @@ Example:
 
 ```go
 square := func(x int) (int, error) {
-	return x * x, nil
+  return x * x, nil
 }
 half := func(x int) (int, error) {
-	return x / 2, nil
+  return x / 2, nil
 }
 add1 := func(x int) (int, error) {
-	return x + 1, nil
+  return x + 1, nil
 }
 functional.Pipe(square, half, add1)(10) // returns 51, nil
 ```
@@ -261,7 +261,7 @@ Example:
 ```go
 foo := []int{1, 2, 3, 4, 5}
 sum := func(result int, val int) (int, error) {
-	return result + val
+  return result + val
 }
 functional.Reduce(sum)(10)(foo) // returns 25, nil
 ```
@@ -337,10 +337,10 @@ Example:
 
 ```go
 m := map[int]string{
-    1: "Matthew",
-    2: "Mark",
-    3: "Luke",
-    4: "John",
+  1: "Matthew",
+  2: "Mark",
+  3: "Luke",
+  4: "John",
 }
 
 functional.Values(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
@@ -368,8 +368,7 @@ Example:
 keys := []int{-1, 0, 1, 2, 2, 3}
 vals := []string{"minus one", "zero", "one", "two", "three"}
 
-functional.ZipMap(keys, vals)
-	// returns [-1: "minus one", 0: "zero", 1: "one", 2: "three"], nil
+functional.ZipMap(keys, vals) // returns [-1: "minus one", 0: "zero", 1: "one", 2: "three"], nil
 ```
 
 ## TODO
