@@ -1,23 +1,23 @@
 package functional
 
-// Runs a function `f() bool` on all elements of slice `src[]`
+// Runs a function `f()` on all elements of slice `src[]`
 // until one returns `false`.
 // Returns `true` if all the `src[]` elements meet the `f()`
-// criteria, `false` otherwise.
+// criteria, `false` otherwise. Also returns an error if occured.
 //
 // Example:
 //	foo := []int{1, 2, 3, 4, 5}
-// 	allNotZero := func(val int) bool {
+// 	notZero := func(val int) bool {
 // 		return val != 0
 // 	}
-// 	functional.All(allNotZero)(foo) // returns true
-func All[T any](f func(val T) bool) func(src []T) bool {
-	return func(src []T) bool {
+// 	functional.All(notZero)(foo) // returns true, nil
+func All[T any](f func(val T) (bool, error)) func(src []T) (bool, error) {
+	return func(src []T) (bool, error) {
 		for _, v := range src {
-			if !f(v) {
-				return false
+			if result, err := f(v); !result || err != nil {
+				return false, err
 			}
 		}
-		return true
+		return true, nil
 	}
 }

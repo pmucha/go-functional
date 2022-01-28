@@ -29,21 +29,22 @@ to make them available through an alias: `f.FunctionName()`.
 ### All
 
 ```go
-func All[T any](f func(val T) bool) func(src []T) bool
+func All[T any](f func(val T) (bool, error)) func(src []T) (bool, error) {
 ```
 
-Runs a function `f() bool` on all elements of slice `src[]` until one
-returns `false`. Returns `true` if all the `src[]` elements meet the `f()`
-criteria, `false` otherwise.
+Runs a function `f()` on all elements of slice `src[]`
+until one returns `false`.
+Returns `true` if all the `src[]` elements meet the `f()`
+criteria, `false` otherwise. Also returns an error if occured.
 
 Example:
 
 ```go
 foo := []int{1, 2, 3, 4, 5}
-allNotZero := func(val int) bool {
-    return val != 0
+notZero := func(val int) (bool, nil) {
+    return val != 0, nil
 }
-functional.All(allNotZero)(foo) // returns true
+functional.All(notZero)(foo) // returns true, nil
 ```
 
 ---
