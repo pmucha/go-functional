@@ -23,7 +23,7 @@ func Test_ToAny(t *testing.T) {
 		t.Fail()
 	}
 
-	if len(anyInterfaces) != 55 {
+	if len(anyInterfaces) != 5 {
 		t.Log("anyfying interfaces failed; expected 5, result:", len(anyInterfaces))
 		t.Fail()
 	}
