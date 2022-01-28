@@ -1,24 +1,30 @@
 package functional
 
 // Reduces the `src[]` to a single value, by running it through `f()`
-// starting from the `begin` value.
+// starting from the `begin` value. Returns this value and an error
+// if occurred.
 //
 // Example:
 //	foo := []int{1, 2, 3, 4, 5}
-// 	reduceSum := func(result int, val int) int {
+// 	sum := func(result int, val int) (int, error) {
 // 		return result + val
 // 	}
-// 	functional.Reduce(reduceSum)(10)(foo) // returns 25
-func Reduce[T any](f func(result T, val T) T) func(begin T) func(src []T) T {
-	return func(begin T) func(src []T) T {
+// 	functional.Reduce(sum)(10)(foo) // returns 25, nil
+func Reduce[T any](f func(result T, val T) (T, error)) func(begin T) func(src []T) (T, error) {
+	return func(begin T) func(src []T) (T, error) {
 		result := begin
 
-		return func(src []T) T {
+		return func(src []T) (T, error) {
+			var zero T
+			var err error
 			for _, v := range src {
-				result = f(result, v)
+				result, err = f(result, v)
+				if err != nil {
+					return zero, err
+				}
 			}
 
-			return result
+			return result, nil
 		}
 	}
 }

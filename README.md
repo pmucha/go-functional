@@ -249,19 +249,21 @@ functional.Pipe(square, half, add1)(10) // returns 51, nil
 ### Reduce
 
 ```go
-func Reduce[T any](f func(result T, val T) T) func(begin T) func(src []T) T
+func Reduce[T any](f func(result T, val T) (T, error)) func(begin T) func(src []T) (T, error)
 ```
 
-Reduces the `src[]` to a single value, by running it through `f()` starting
-from the `begin` value.
+Reduces the `src[]` to a single value, by running it through `f()`
+starting from the `begin` value. Returns this value and an error
+if occurred.
 
 Example:
+
 ```go
 foo := []int{1, 2, 3, 4, 5}
-reduceSum := func(result int, val int) int {
-    return result + val
+sum := func(result int, val int) (int, error) {
+	return result + val
 }
-functional.Reduce(reduceSum)(10)(foo) // returns 25
+functional.Reduce(sum)(10)(foo) // returns 25, nil
 ```
 
 ---
