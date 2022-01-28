@@ -162,14 +162,19 @@ functional.Filter(isEven)(foo) // returns [2, 4], nil
 ### Includes
 
 ```go
-func Includes[T comparable](val T) func(src []T) bool
+func Includes[T comparable](val T) func(src []T) (bool, error)
 ```
-Checks if slice `src[]` contains a `val`. Returns `bool` result.
+Checks if slice `src[]` contains a `val`.
+Returns `bool` result. Also it returns
+an error if occured.
+
+**Note**: It works just like `Contains` except
+it accepts the arguments in reverse order.
 
 Example:
 ```go
 foo := []int{1, 2, 3, 4, 5, 6, 7, 8}
-functional.Includes(5)(foo) // returns true
+functional.Includes(5)(foo) // returns true, nil
 ```
 
 ---
