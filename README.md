@@ -327,10 +327,11 @@ functional.Uniq(foo) // returns [1 2 3 4 5], nil
 ### Values
 
 ```go
-func Values[K comparable, V any](m map[K]V) []V
+func Values[K comparable, V any](m map[K]V) ([]V, error)
 ```
 
-Returns a slice containing the keys of the provided map `m`.
+Returns a slice containing the values of the provided map `m`.
+Also returns an error if occurred.
 
 Example:
 
@@ -342,11 +343,8 @@ m := map[int]string{
     4: "John",
 }
 
-functional.Values(m) // returns ["Matthew" "Mark" "Luke" "John"]
+functional.Values(m) // returns ["Matthew" "Mark" "Luke" "John"], nil
 ```
-
-**Note:** Due to current Go generics' limitations the usability of this
-function in composing is limited.
 
 ---
 
