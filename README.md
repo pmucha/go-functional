@@ -85,6 +85,7 @@ Performs right-to-left function composition.
 
 Example:
 
+```go
 square := func(x int) (int, error) {
 	return x * x, nil
 }
@@ -122,17 +123,18 @@ functional.Concat(src1, src2)
 ### Contains
 
 ```go
-func Contains[T comparable](val T) func(src []T) bool
+func Contains[T comparable](src []T) func(val T) (bool, error) {
 ```
-Checks if slice `src[]` contains a `val`. Returns `bool` result.
-
+Checks if slice `src[]` contains a `val`.
+Returns `bool` result and an error if occured.
 **Note**: It works just like `Includes` except
 it accepts the arguments in reverse order.
 
 Example:
+
 ```go
 foo := []int{1, 2, 3, 4, 5, 6, 7, 8}
-functional.Contains(foo)(5) // returns true
+functional.Contains(foo)(5) // returns true, nil
 ```
 
 ---
