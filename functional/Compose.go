@@ -4,21 +4,22 @@ package functional
 //
 // Example:
 //
-// 	square := func(x int) int {
-// 		return x * x
+// 	square := func(x int) (int, error) {
+// 		return x * x, nil
 // 	}
-// 	half := func(x int) int {
-// 		return x / 2
+// 	half := func(x int) (int, error) {
+// 		return x / 2, nil
 // 	}
-// 	add1 := func(x int) int {
-// 		return x + 1
+// 	add1 := func(x int) (int, error) {
+// 		return x + 1, nil
 // 	}
-//	functional.Compose(add1, half, square)(10) // returns 51
-func Compose[T any](f ...func(T) T) func(T) T {
-	return func(x T) T {
+//	functional.Compose(add1, half, square)(10) // returns 51, nil
+func Compose[T any](f ...func(T) (T, error)) func(T) (T, error) {
+	return func(x T) (T, error) {
+		var err error
 		for i := len(f) - 1; i >= 0; i-- {
-			x = f[i](x)
+			x, err = f[i](x)
 		}
-		return x
+		return x, err
 	}
 }

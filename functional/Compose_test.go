@@ -3,32 +3,34 @@ package functional
 import "testing"
 
 func Test_Compose(t *testing.T) {
-	square := func(x int) int {
-		return x * x
+	square := func(x int) (int, error) {
+		return x * x, nil
 	}
 
-	half := func(x int) int {
-		return x / 2
+	half := func(x int) (int, error) {
+		return x / 2, nil
 	}
 
-	add1 := func(x int) int {
-		return x + 1
+	add1 := func(x int) (int, error) {
+		return x + 1, nil
 	}
 
-	if result := Compose(add1, half, square)(10); result != 51 {
+	composed := Compose(add1, half, square)
+
+	if result, _ := composed(10); result != 51 {
 		t.Log("composing int failed; expected 51, result:", result)
 		t.Fail()
 	}
 
-	repeat := func(s string) string {
-		return s + s
+	repeat := func(s string) (string, error) {
+		return s + s, nil
 	}
 
-	pick := func(s string) string {
-		return s[2:8]
+	pick := func(s string) (string, error) {
+		return s[2:8], nil
 	}
 
-	if result := Compose(pick, repeat)("hello"); result != "llohel" {
+	if result, _ := Compose(pick, repeat)("hello"); result != "llohel" {
 		t.Log("composing string failed; expected \"llohel\", result:", result)
 		t.Fail()
 	}

@@ -79,23 +79,22 @@ functional.Any(isEven)(foo) // returns true, nil
 ### Compose
 
 ```go
-func Compose[T any](f ...func(T) T) func(T) T
+func Compose[T any](f ...func(T) (T, error)) func(T) (T, error) {
 ```
 Performs right-to-left function composition.
 
 Example:
 
-```go
-square := func(x int) int {
-    return x * x
+square := func(x int) (int, error) {
+	return x * x, nil
 }
-half := func(x int) int {
-    return x / 2
+half := func(x int) (int, error) {
+	return x / 2, nil
 }
-add1 := func(x int) int {
-    return x + 1
+add1 := func(x int) (int, error) {
+	return x + 1, nil
 }
-functional.Compose(add1, half, square)(10) // returns 51
+functional.Compose(add1, half, square)(10) // returns 51, nil
 ```
 
 ---
