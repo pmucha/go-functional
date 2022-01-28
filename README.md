@@ -1,9 +1,12 @@
 # Go functional
 
 A library providing simple utilities helpful in everyday programming written
-in a functional manner -- curried, iteratee-first data-last.
+in a functional manner. They are curried if possible and reasonable.
+They are built as "iteratee-first data-last", meaning:
+`[do-what] -- [do how] -- [to what]` returning `result, error`.
+For example: do `Map`, do `func`, to `slice`, returning `new slice` and possible error.
 
-All functions use generics, so they require Go ver. 1.18+.
+Most functions use generics, so they require Go ver. 1.18+.
 
 ## Installation
 
