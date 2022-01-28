@@ -257,6 +257,24 @@ functional.Reduce(reduceSum)(10)(foo) // returns 25
 
 ---
 
+### ToAny
+
+```go
+func ToAny[T any](s []T) []any
+```
+
+Converts any slice of type `[]T` to `[]any` which might be helpful for
+functions such as `ZipMap()`.
+
+Example:
+
+```go
+strings := []string{"foo", "bar", "baz"}
+ToAny(strings) // returns []interface [foo bar baz]
+```
+
+---
+
 ### Union
 
 ```go
