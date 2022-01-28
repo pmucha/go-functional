@@ -225,20 +225,21 @@ functional.Map(double)(foo) // returns [2 4 6 8 10], nil
 ### Pipe
 
 ```go
-func Pipe[T any](f ...func(T) T) func(T) T
+func Pipe[T any](f ...func(T) (T, error)) func(T) (T, error)
 ```
 Performs left-to-right function composition.
 
 Example:
+
 ```go
-square := func(x int) int {
-    return x * x
+square := func(x int) (int, error) {
+	return x * x, nil
 }
-half := func(x int) int {
-    return x / 2
+half := func(x int) (int, error) {
+	return x / 2, nil
 }
-add1 := func(x int) int {
-    return x + 1
+add1 := func(x int) (int, error) {
+	return x + 1, nil
 }
 functional.Pipe(square, half, add1)(10) // returns 51
 ```
