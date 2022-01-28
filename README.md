@@ -241,7 +241,7 @@ half := func(x int) (int, error) {
 add1 := func(x int) (int, error) {
 	return x + 1, nil
 }
-functional.Pipe(square, half, add1)(10) // returns 51
+functional.Pipe(square, half, add1)(10) // returns 51, nil
 ```
 
 ---

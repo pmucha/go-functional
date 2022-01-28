@@ -16,10 +16,14 @@ package functional
 //	functional.Compose(add1, half, square)(10) // returns 51, nil
 func Compose[T any](f ...func(T) (T, error)) func(T) (T, error) {
 	return func(x T) (T, error) {
+		var zero T
 		var err error
 		for i := len(f) - 1; i >= 0; i-- {
 			x, err = f[i](x)
+			if err != nil {
+				return zero, err
+			}
 		}
-		return x, err
+		return x, nil
 	}
 }

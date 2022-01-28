@@ -1,6 +1,9 @@
 package functional
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func Test_Pipe(t *testing.T) {
 	square := func(x int) (int, error) {
@@ -28,8 +31,17 @@ func Test_Pipe(t *testing.T) {
 		return s[2:8], nil
 	}
 
-	if result, _ := Pipe(repeat, pick)("hello"); result != "llohel" {
+	forcedErr := func(s string) (string, error) {
+		return "", errors.New("forced error")
+	}
+
+	if result, e := Pipe(repeat, pick)("hello"); result != "llohel" || e != nil {
 		t.Log("piping string failed; expected \"llohel\", result:", result)
+		t.Fail()
+	}
+
+	if _, e := Pipe(repeat, forcedErr, pick)("hello"); e == nil {
+		t.Log("forced error failed; error:", e)
 		t.Fail()
 	}
 }
